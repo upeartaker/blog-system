@@ -6,7 +6,7 @@
 
 <script lang="ts">
 import {Component , Vue} from 'vue-property-decorator';
-import HeaderComponent from '@/components/HeaderComponent.vue';
+import HeaderComponent from '@/components/common/HeaderComponent.vue';
 @Component({
     components: {
         HeaderComponent,

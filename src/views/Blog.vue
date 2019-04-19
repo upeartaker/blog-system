@@ -5,8 +5,8 @@
 </template>
 
 <script lang="ts">
-import { Component, Vue } from "vue-property-decorator";
-import HeaderComponent from "@/components/HeaderComponent.vue"; // @ is an alias to /src
+import { Component, Vue } from 'vue-property-decorator';
+import HeaderComponent from '@/components/common/HeaderComponent.vue'; // @ is an alias to /src
 // 利用decorator 修饰符来引入组件
 @Component({
   components: {

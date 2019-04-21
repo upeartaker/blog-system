@@ -15,7 +15,7 @@
     <li>
       <img
         src="https://user-gold-cdn.xitu.io/2019/1/3/1681263f274b8652?imageView2/1/w/100/h/100/q/85/format/webp/interlace/1"
-        alt
+        @click="handleHref"
       >
     </li>
   </ul>
@@ -30,20 +30,26 @@ import {
   Model,
   Provide,
   Component,
-  Inject,
-} from 'vue-property-decorator';
+  Inject
+} from "vue-property-decorator";
 @Component
 export default class HeaderComponent extends Vue {
   // data
-  public activeName: string = 'xiaming';
+  public activeName: string = "xiaming";
 
   // methods
   public handleClick(tab: object | string, event: object): void {
     // console.log(tab, event);
   }
 
+  public handleHref(): void {
+    this.$router.push({
+      name:'settings'
+    });
+  }
+
   // watch
-  @Watch('activeName')
+  @Watch("activeName")
   public onDemoChange(newVal: string, oldVal: string) {
     // console.log(newVal);
   }

@@ -12,16 +12,16 @@
   </el-table>
 </template>
 <script lang="ts">
-import { Vue, Component } from 'vue-property-decorator';
+import { Vue, Component } from "vue-property-decorator";
 @Component
 export default class ArticleListComponent extends Vue {
   // data
   public mockList: object = {
-    tag: '随笔',
-    date: '2016-05-02',
-    title: 'JS事件机制之Microtasks & Tasks & Queues',
+    tag: "随笔",
+    date: "2016-05-02",
+    title: "JS事件机制之Microtasks & Tasks & Queues"
   };
-  public articleList: Array<object> = Array(20).fill(this.mockList);
+  public articleList: number[] = Array(20).fill(this.mockList);
 
   public vm: any = this; // 说明：this.$notify 实际上是elementUI上提供的方法，没有通过typescript注册，所以被tslint检测会报错，所以我将this实例进行一次ts注册。
 
@@ -32,16 +32,16 @@ export default class ArticleListComponent extends Vue {
 
   public handleClick(row: any): void {
     this.vm.$notify({
-      title: '提示信息',
-      message: '此功能开发中',
-      duration: 1000,
+      title: "提示信息",
+      message: "此功能开发中",
+      duration: 1000
     });
   }
   public handleWrite(): void {
     this.vm.$notify({
-      title: '提示信息',
-      message: '此功能开发中',
-      duration: 1000,
+      title: "提示信息",
+      message: "此功能开发中",
+      duration: 1000
     });
   }
 }

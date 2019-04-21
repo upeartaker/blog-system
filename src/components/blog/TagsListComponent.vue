@@ -19,18 +19,18 @@
   </div>
 </template>
 <script lang="ts">
-import { Vue, Component } from "vue-property-decorator";
+import { Vue, Component } from 'vue-property-decorator';
 
 @Component
 export default class TagsListComponent extends Vue {
   // data
   public mockData: object = {
     imgUrl:
-      "https://shadow.elemecdn.com/app/element/hamburger.9cf7b091-55e9-11e9-a976-7f4d0b07eef6.png",
+      'https://shadow.elemecdn.com/app/element/hamburger.9cf7b091-55e9-11e9-a976-7f4d0b07eef6.png',
     currentDate: new Date(),
   };
 
-  public renderData: Array<object> = Array(3).fill(this.mockData);
+  public renderData: number[] = Array(3).fill(this.mockData);
 }
 </script>
 <style lang="scss" scoped>

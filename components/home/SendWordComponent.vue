@@ -1,16 +1,21 @@
 <template>
   <h3>
-    <span>{{hello}}</span>
+    <span>{{hello2}}</span>
   </h3>
 </template>
 
 <script>
 export default {
+  name:'SendWrodComponent',
+  props:['message'],
+  // data
   data() {
     return {
-      hello: "Welcome to my blog"
+      hello: "Welcome to my blog",
+      hello2: this.$props.message
     };
-  }
+  },
+  
 };
 </script>
 <style lang="scss" scoped>

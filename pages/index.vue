@@ -2,22 +2,24 @@
   <div class="home-wrapper">
     <el-main>
       <CarouselComponent></CarouselComponent>
-      <SendWordComponent></SendWordComponent>
+      <SendWordComponent :message="hello"></SendWordComponent>
     </el-main>
   </div>
 </template>
 
 <script>
-import CarouselComponent from '~/components/home/CarouselComponent.vue';
-import SendWordComponent from '~/components/home/SendWordComponent.vue';
+import CarouselComponent from "~/components/home/CarouselComponent.vue";
+import SendWordComponent from "~/components/home/SendWordComponent.vue";
+import axios from "axios";
 export default {
   components: {
     CarouselComponent,
-    SendWordComponent,
+    SendWordComponent
   },
-  head(){
+  middleware: 'getCookie',
+  head() {
     return {
-      title: 'blog',
+      title: this.title,
       meta: [
         {
           hid: "description",
@@ -25,7 +27,15 @@ export default {
           content: "My blog"
         }
       ]
-    }
+    };
+  },
+  asyncData(context) {
+    return axios.get("http://127.0.0.1:4000/meta").then(res => {
+      return {
+        hello: res.data.say,
+        title: res.data.title
+      };
+    });
   }
 };
 </script>
@@ -33,7 +43,7 @@ export default {
 <style lang="scss" scoped>
 .home-wrapper {
   height: 100%;
-  width:100%;
+  width: 100%;
   background-image: url("https://upeartaker.github.io/img/home-bg.jpg");
 }
 </style>

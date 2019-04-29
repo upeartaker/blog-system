@@ -36,7 +36,9 @@ module.exports = {
   ** Plugins to load before mounting the App
   */
   plugins: [
+    '@/plugins/utils',
     '@/plugins/element-ui',
+    '@/plugins/axios',
     // { src: "@/plugins/vue-markdown.js", ssr: false }
   ],
 
@@ -52,6 +54,13 @@ module.exports = {
   */
   axios: {
     // See https://github.com/nuxt-community/axios-module#options
+  },
+
+  /**
+   * router
+   */
+  router: {
+    // middleware: 'getCookie'  在write路由下报错，两次设置请求头
   },
 
   /*

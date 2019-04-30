@@ -20,7 +20,8 @@ export default {
   },
   head(){
     return{
-      title: this.title,
+      // title: this.title,
+      title: 'test',
       meta: [
         {
           hid: "description",
@@ -31,11 +32,11 @@ export default {
     }
   },
   asyncData(context) {
-    return axios.get('http://127.0.0.1:4000/meta/blog').then(res=>{
-      return {
-        title:res.data.title
-      }
-    })
+    // return axios.get('http://127.0.0.1:4000/meta/blog').then(res=>{
+    //   return {
+    //     title:res.data.title
+    //   }
+    // })
   },
 };
 </script>

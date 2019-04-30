@@ -41,8 +41,13 @@
 export default {
   data() {
     return {
-      isLogin: false
-    };
+      
+    }
+  },
+  computed:{
+    isLogin(){
+      return this.$store.state.userLogin
+    }
   },
   methods: {
     handleHref() {

@@ -1,7 +1,7 @@
 <template>
   <div class="editor-container">
     <no-ssr>
-      <el-form :model="details">
+      <el-form ref="details" :model="details">
         <el-form-item label="标题">
           <el-input
             :v-model="details.title"
@@ -87,7 +87,6 @@ export default {
   methods: {
     editorChange(value, render) {
       // console.log(value, render);
-      this.checkDetails(1, "");
     },
     editorSave(value, render) {
       // TODO 处理上传问题
@@ -96,35 +95,37 @@ export default {
         title: this.details.title,
         tag: this.details.tag
       };
-      axios
-        .post("/api/article/save", JSON.stringify(params), {
-          headers: {
-            "Content-Type": "application/json"
-          }
-        })
-        .then(res => {
-          if (res.data.state && res.data.code === 1) {
-            this.$message({
-              message: "保存成功",
-              duration: 2000,
-              onClose: () => {
-                this.$router.push({
-                  name: "blog"
-                });
-              }
-            });
-          } else {
-            this.$message({
-              message: "用户未登录",
-              duration: 2000,
-              onClose: () => {
-                this.$router.push({
-                  name: "login"
-                });
-              }
-            });
-          }
-        });
+      if (this.checkDetails(params.details, params.title, params.tag)) {
+        axios
+          .post("/api/article/save", JSON.stringify(params), {
+            headers: {
+              "Content-Type": "application/json"
+            }
+          })
+          .then(res => {
+            if (res.data.state && res.data.code === 1) {
+              this.$message({
+                message: "保存成功",
+                duration: 2000,
+                onClose: () => {
+                  this.$router.push({
+                    name: "blog"
+                  });
+                }
+              });
+            } else {
+              this.$message({
+                message: "用户未登录",
+                duration: 2000,
+                onClose: () => {
+                  this.$router.push({
+                    name: "login"
+                  });
+                }
+              });
+            }
+          });
+      }
     },
     checkDetails(...args) {
       if (args.length === 0) {
@@ -133,22 +134,16 @@ export default {
           duration: 1000
         });
       }
-      args.map(item => {
-        if (!item) {
+      for (let i = 0; i < args.length; i++) {
+        if (!args[i]) {
           this.$message({
             message: "标题和标签不能为空",
             duration: 1000
           });
+          return false;
         }
-      });
-      if (this.details.title && this.details.tag) {
-        return true;
-      } else {
-        this.$message({
-          message: "标题和标签不能为空",
-          duration: 1000
-        });
       }
+      return true;
     }
   }
 };

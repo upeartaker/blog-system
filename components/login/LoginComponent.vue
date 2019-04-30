@@ -59,11 +59,11 @@ export default {
             // countryCode:86,
             // mobile: this.info.username,
             username: this.info.username,
-            password: this.info.password,
+            password: this.info.password
           };
           axios
             .post("/api/login", JSON.stringify(params), {
-              headers: { "Content-Type": "application/json"},
+              headers: { "Content-Type": "application/json" }
             })
             .then(res => {
               if (res.data.state) {
@@ -72,7 +72,8 @@ export default {
                   type: "success",
                   duration: 1000,
                   onClose: () => {
-                    this.$router.push('/');
+                    this.$store.commit("toLogin");
+                    this.$router.push("/");
                   }
                 });
               } else {
@@ -104,13 +105,13 @@ export default {
   right: 0;
   bottom: 0;
   margin: auto;
-  h3{
+  h3 {
     text-align: center;
-    height:40px;
-    line-height:40px;
+    height: 40px;
+    line-height: 40px;
   }
-  .el-form-item:last-child{
-    margin-left:-80px;
+  .el-form-item:last-child {
+    margin-left: -80px;
     text-align: center;
   }
 }

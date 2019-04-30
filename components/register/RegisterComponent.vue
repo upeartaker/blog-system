@@ -1,5 +1,6 @@
 <template>
   <el-card>
+    <h3>注册</h3>
     <div class="register-container">
       <el-form
         ref="info"
@@ -96,5 +97,14 @@ export default {
   right: 0;
   bottom: 0;
   margin: auto;
+  h3{
+    text-align: center;
+    height:40px;
+    line-height:40px;
+  }
+  .el-form-item:last-child{
+    margin-left:-80px;
+    text-align: center;
+  }
 }
 </style>

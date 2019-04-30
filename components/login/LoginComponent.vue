@@ -1,5 +1,6 @@
 <template>
   <el-card>
+    <h3>登录</h3>
     <div class="login-container">
       <el-form
         ref="info"
@@ -55,35 +56,36 @@ export default {
       this.$refs["info"].validate(valid => {
         if (valid) {
           let params = {
-            countryCode:86,
-            mobile: this.info.username,
+            // countryCode:86,
+            // mobile: this.info.username,
+            username: this.info.username,
             password: this.info.password,
           };
-          // axios
-          //   .post("/api/login", JSON.stringify(params), {
-          //     headers: { "Content-Type": "application/json"},
-          //   })
-          //   .then(res => {
-          //     if (res.data.state) {
-          //       this.$message({
-          //         message: "登录成功",
-          //         type: "success",
-          //         duration: 1000,
-          //         onClose: () => {
-          //           this.$router.push('/');
-          //         }
-          //       });
-          //     } else {
-          //       this.$message("账号或密码错误");
-          //     }
-          //   });
-          axios.post(
-            "/api/api/m/user-login/password-login.json",
-            JSON.stringify(params),
-            { headers: { "Content-Type": "application/json" } }
-          ).then(res=>{
-            location.href = 'http://www.dxzjjl.cn'
-          })
+          axios
+            .post("/api/login", JSON.stringify(params), {
+              headers: { "Content-Type": "application/json"},
+            })
+            .then(res => {
+              if (res.data.state) {
+                this.$message({
+                  message: "登录成功",
+                  type: "success",
+                  duration: 1000,
+                  onClose: () => {
+                    this.$router.push('/');
+                  }
+                });
+              } else {
+                this.$message("账号或密码错误");
+              }
+            });
+          // axios.post(
+          //   "/api/api/m/user-login/password-login.json",
+          //   JSON.stringify(params),
+          //   { headers: { "Content-Type": "application/json" } }
+          // ).then(res=>{
+          //   location.href = 'http://www.dxzjjl.cn'
+          // })
         } else {
           this.$message("请输入符合规则的用户名和密码");
         }
@@ -102,5 +104,14 @@ export default {
   right: 0;
   bottom: 0;
   margin: auto;
+  h3{
+    text-align: center;
+    height:40px;
+    line-height:40px;
+  }
+  .el-form-item:last-child{
+    margin-left:-80px;
+    text-align: center;
+  }
 }
 </style>

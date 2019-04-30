@@ -1,6 +1,29 @@
 <template>
   <div class="editor-container">
     <no-ssr>
+      <el-form :model="details">
+        <el-form-item label="标题">
+          <el-input
+            :v-model="details.title"
+            placeholder="请输入标题"
+          ></el-input>
+        </el-form-item>
+        <el-form-item label="标签">
+          <el-select
+            v-model="details.tag"
+            placeholder="请选择标签"
+          >
+            <el-option
+              label="随笔"
+              value="随笔"
+            ></el-option>
+            <el-option
+              label="记事"
+              value="记事"
+            ></el-option>
+          </el-select>
+        </el-form-item>
+      </el-form>
       <mavon-editor
         :toolbar="toolbar"
         :subfield="false"
@@ -13,9 +36,10 @@
 <script>
 import "mavon-editor/dist/css/index.css";
 var mavonEditor = require("mavon-editor");
+import axios from "axios";
 export default {
   components: {
-      "mavon-editor": mavonEditor.mavonEditor
+    "mavon-editor": mavonEditor.mavonEditor
   },
   data() {
     return {
@@ -53,15 +77,78 @@ export default {
         /* 2.2.1 */
         subfield: true, // 单双栏模式
         preview: true // 预览
+      },
+      details: {
+        title: "",
+        tag: ""
       }
     };
   },
   methods: {
     editorChange(value, render) {
       // console.log(value, render);
+      this.checkDetails(1, "");
     },
     editorSave(value, render) {
       // TODO 处理上传问题
+      let params = {
+        details: render,
+        title: this.details.title,
+        tag: this.details.tag
+      };
+      axios
+        .post("/api/article/save", JSON.stringify(params), {
+          headers: {
+            "Content-Type": "application/json"
+          }
+        })
+        .then(res => {
+          if (res.data.state && res.data.code === 1) {
+            this.$message({
+              message: "保存成功",
+              duration: 2000,
+              onClose: () => {
+                this.$router.push({
+                  name: "blog"
+                });
+              }
+            });
+          } else {
+            this.$message({
+              message: "用户未登录",
+              duration: 2000,
+              onClose: () => {
+                this.$router.push({
+                  name: "login"
+                });
+              }
+            });
+          }
+        });
+    },
+    checkDetails(...args) {
+      if (args.length === 0) {
+        this.$message({
+          message: "标题和标签不能为空",
+          duration: 1000
+        });
+      }
+      args.map(item => {
+        if (!item) {
+          this.$message({
+            message: "标题和标签不能为空",
+            duration: 1000
+          });
+        }
+      });
+      if (this.details.title && this.details.tag) {
+        return true;
+      } else {
+        this.$message({
+          message: "标题和标签不能为空",
+          duration: 1000
+        });
+      }
     }
   }
 };

@@ -62,18 +62,18 @@ module.exports = {
    * Proxy module configuration
    */
   proxy: {
-    // '/api': {
-    //   target: 'http://127.0.0.1:4000',
-    //   pathRewrite: {
-    //     '^/api' : '/'
-    //   }
-    // },
     '/api': {
-      target: 'http://m.dxzjjl.cn',
+      target: 'http://127.0.0.1:4000',
       pathRewrite: {
         '^/api' : '/'
       }
-    }
+    },
+    // '/api': {
+    //   target: 'http://m.dxzjjl.cn',
+    //   pathRewrite: {
+    //     '^/api' : '/'
+    //   }
+    // }
   },
 
   /**
